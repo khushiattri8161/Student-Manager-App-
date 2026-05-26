@@ -274,17 +274,27 @@ Button(
     **btn_style
 ).grid(row=2, column=1, padx=8, pady=8)
 
-# ---------------- OUTPUT BOX ----------------
+# ---------------- OUTPUT BOX WITH SCROLLBAR ----------------
+output_frame = Frame(root, bg="#1E1E2E")
+output_frame.pack(pady=20)
+
+scrollbar = Scrollbar(output_frame)
+
 result_box = Text(
-    root,
+    output_frame,
     height=12,
     width=55,
     font=("Consolas", 11),
     bg="#2A2A40",
     fg="white",
-    bd=0
+    bd=0,
+    yscrollcommand=scrollbar.set
 )
-result_box.pack(pady=20)
+
+scrollbar.config(command=result_box.yview)
+
+scrollbar.pack(side=RIGHT, fill=Y)
+result_box.pack(side=LEFT)
 
 # ---------------- FOOTER ----------------
 footer = Label(
